@@ -9,10 +9,14 @@ class Problem():
             def aux_beta(x):
                 return beta
             self.beta = aux_beta
+        else:
+            self.beta = beta
         if isinstance(nu, int) or isinstance(nu, float):
             def aux_nu(x):
                 return nu
             self.nu = aux_nu
+        else:
+            self.nu = nu
         self.t_max = t_max
         self.h = h
 
@@ -62,7 +66,22 @@ class Solver():
 
         plt.show()
 
-problem = Problem(s=1500, i=1, r=0, beta=0.0005, nu=0.1, t_max=120, h=0.5)
+
+# Problema com lambda igual a 0.0005
+problem = Problem(s=1500, i=1, r=0, beta=0.0005, nu=0.1, t_max=300, h=0.5)
+
+solver = Solver(problem)
+solver.eval(problem)
+
+
+# Problema com lambda igual a 0.0001
+problem = Problem(s=1500, i=1, r=0, beta=0.0001, nu=0.1, t_max=300, h=0.5)
+
+solver = Solver(problem)
+solver.eval(problem)
+
+# Problema com lambda variavel de 0.0005 0 <= t <= 12 e 0.0001 12 < t
+problem = Problem(s=1500, i=1, r=0, beta=lambda t: 0.0005 if t <= 12 else 0.0001, nu=0.1, t_max=300, h=0.5)
 
 solver = Solver(problem)
 solver.eval(problem)
