@@ -99,3 +99,10 @@ problem = Problem(s=1500, i=1, r=0, v=0, beta=lambda t: 0.0005 if t <= 12 else 0
 
 solver = Solver(problem)
 solver.eval(problem)
+
+# Problema com rho variavel (questão 44)
+problem = Problem(s=1500, i=1, r=0, v=0, beta=lambda t: 0.0005 if t <= 12 else 0.0001, nu=0.1,
+                  rho=lambda t: 0.1 if 5 < t < 16 else 0, t_max=1200, h=0.5)
+
+solver = Solver(problem)
+solver.eval(problem)
